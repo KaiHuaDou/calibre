@@ -26,7 +26,7 @@ from calibre.srv.routes import endpoint, json
 from calibre.srv.utils import get_db, get_use_roman, http_date
 from calibre.utils.config_base import tweaks
 from calibre.utils.date import timestampfromdt
-from calibre.utils.filenames import ascii_filename, atomic_rename
+from calibre.utils.filenames import format_filename, atomic_rename
 from calibre.utils.img import image_from_data, scale_image
 from calibre.utils.localization import _
 from calibre.utils.resources import get_image_path as I, get_path as P
@@ -170,7 +170,7 @@ def book_filename(rd, book_id, mi, fmt, as_encoded_unicode=False):
         fname = sanitize_file_name(fname).encode('utf-8')
         fname = str(quote(fname))
     else:
-        fname = ascii_filename(fname).replace('"', '_')
+        fname = format_filename(fname).replace('"', '_')
     if ext == 'kepub' and 'Kobo Touch' in rd.inheaders.get('User-Agent', ''):
         fname = fname.replace('!', '_')
         fname += '.epub'

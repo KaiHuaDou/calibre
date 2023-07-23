@@ -17,7 +17,7 @@ from calibre.ebooks.metadata import fmt_sidx, title_sort
 from calibre.utils.config import Config, StringConfig, tweaks
 from calibre.utils.date import as_local_time, is_date_undefined
 from calibre.utils.filenames import (
-    ascii_filename, make_long_path_useable, shorten_components_to,
+    format_filename, make_long_path_useable, shorten_components_to,
 )
 from calibre.utils.formatter import TemplateFormatter
 from calibre.utils.localization import _
@@ -174,7 +174,7 @@ class Formatter(TemplateFormatter):
 
 
 def get_components(template, mi, id, timefmt='%b %Y', length=250,
-        sanitize_func=ascii_filename, replace_whitespace=False,
+        sanitize_func=format_filename, replace_whitespace=False,
         to_lowercase=False, safe_format=True, last_has_extension=True,
         single_dir=False):
     tsorder = tweaks['save_template_title_series_sorting']
@@ -281,7 +281,7 @@ def save_book_to_disk(book_id, db, root, opts, length):
 def get_path_components(opts, mi, book_id, path_length):
     try:
         components = get_components(opts.template, mi, book_id, opts.timefmt, path_length,
-            ascii_filename if opts.asciiize else sanitize_file_name,
+            format_filename if opts.asciiize else sanitize_file_name,
             to_lowercase=opts.to_lowercase,
             replace_whitespace=opts.replace_whitespace, safe_format=False,
             last_has_extension=False, single_dir=opts.single_dir)

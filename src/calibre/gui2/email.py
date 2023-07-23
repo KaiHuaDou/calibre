@@ -172,8 +172,8 @@ def send_mails(jobnames, callback, attachments, to_s, subjects,
             from calibre.utils.short_uuid import uuid4
             if is_for_kindle(to):
                 # https://www.mobileread.com/forums/showthread.php?t=349290
-                from calibre.utils.filenames import ascii_filename
-                aname = ascii_filename(aname)
+                from calibre.utils.filenames import format_filename
+                aname = format_filename(aname)
             else:
                 aname = f'{uuid4()}.' + aname.rpartition('.')[-1]
             subject = uuid4()

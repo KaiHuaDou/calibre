@@ -11,7 +11,7 @@ from lxml.html.builder import HR, IMG
 from calibre import sanitize_file_name
 from calibre.constants import iswindows
 from calibre.ebooks.docx.names import SVG_BLIP_URI, barename
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 from calibre.utils.img import image_to_data, resize_to_fit
 from calibre.utils.imghdr import what
 from polyglot.builtins import iteritems, itervalues
@@ -25,7 +25,7 @@ class LinkedImageNotFound(ValueError):
 
 
 def image_filename(x):
-    return sanitize_file_name(re.sub(r'[^0-9a-zA-Z.-]', '_', ascii_filename(x)).lstrip('_').lstrip('.'))
+    return sanitize_file_name(re.sub(r'[^0-9a-zA-Z.-]', '_', format_filename(x)).lstrip('_').lstrip('.'))
 
 
 def emu_to_pt(x):

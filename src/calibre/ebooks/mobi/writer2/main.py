@@ -12,7 +12,7 @@ from calibre.ebooks import normalize
 from calibre.ebooks.mobi.writer2.serializer import Serializer
 from calibre.ebooks.compression.palmdoc import compress_doc
 from calibre.ebooks.mobi.langcodes import iana2mobi
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 from calibre.ebooks.mobi.writer2 import (PALMDOC, UNCOMPRESSED)
 from calibre.ebooks.mobi.utils import (encint, encode_trailing_data,
         align_block, detect_periodical, RECORD_SIZE, create_text_record)
@@ -457,7 +457,7 @@ class MobiWriter:
         '''
         Write the PalmDB header
         '''
-        title = ascii_filename(str(self.oeb.metadata.title[0])).replace(
+        title = format_filename(str(self.oeb.metadata.title[0])).replace(
                 ' ', '_')
         if not isinstance(title, bytes):
             title = title.encode('ascii')

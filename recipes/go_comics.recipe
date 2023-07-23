@@ -7,7 +7,7 @@ import shutil, os
 from calibre.constants import iswindows
 from calibre.web.feeds.news import BasicNewsRecipe
 from calibre.ptempfile import PersistentTemporaryDirectory
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 
 
 def absolutize(url):
@@ -570,7 +570,7 @@ class GoComics(BasicNewsRecipe):
         return {'h1':title, 'date':title_parts[-1], 'img':str(img)}
 
     def render_comic_page(self, data, num, title):
-        fname = ascii_filename('%03d_%s' % (num, title)).replace(' ', '_')
+        fname = format_filename('%03d_%s' % (num, title)).replace(' ', '_')
         path = os.path.join(self.gocomics_dir, fname)
         html = '<html><body>{h1}<h2>{date}</h2><div>{img}</div></body></html>'.format(**data)
         with open(path, 'wb') as f:

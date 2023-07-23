@@ -19,7 +19,7 @@ from calibre.ebooks import unit_convert
 from calibre.ebooks.oeb.base import (XHTML, XHTML_NS, CSS_MIME, OEB_STYLES, SVG_NS,
         namespace, barename, XPath, css_text)
 from calibre.ebooks.oeb.stylizer import Stylizer
-from calibre.utils.filenames import ascii_filename, ascii_text
+from calibre.utils.filenames import format_filename, ascii_text
 from calibre.utils.icu import numeric_sort_key
 from polyglot.builtins import iteritems, string_or_bytes
 
@@ -243,7 +243,7 @@ class CSSFlattener:
         for i, font in enumerate(faces):
             ext = 'otf' if font['is_otf'] else 'ttf'
             fid, href = self.oeb.manifest.generate(id='font',
-                href='fonts/%s.%s'%(ascii_filename(font['full_name']).replace(' ', '-'), ext))
+                href='fonts/%s.%s'%(format_filename(font['full_name']).replace(' ', '-'), ext))
             item = self.oeb.manifest.add(fid, href,
                     guess_type('dummy.'+ext)[0],
                     data=font_scanner.get_font_data(font))

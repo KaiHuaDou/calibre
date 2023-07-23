@@ -13,7 +13,7 @@ from lxml import etree
 from calibre import guess_type
 from calibre.ebooks.oeb.base import XPath, CSS_MIME, XHTML
 from calibre.ebooks.oeb.transforms.subset import get_font_properties, find_font_face_rules, elem_style
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 from calibre.utils.fonts.scanner import font_scanner, NoFonts
 from calibre.ebooks.oeb.polish.embed import font_key
 from polyglot.builtins import iteritems
@@ -228,7 +228,7 @@ class EmbedFonts:
             data = font_scanner.get_font_data(f)
             name = f['full_name']
             ext = 'otf' if f['is_otf'] else 'ttf'
-            name = ascii_filename(name).replace(' ', '-').replace('(', '').replace(')', '')
+            name = format_filename(name).replace(' ', '-').replace('(', '').replace(')', '')
             fid, href = self.oeb.manifest.generate(id='font', href='fonts/%s.%s'%(name, ext))
             item = self.oeb.manifest.add(fid, href, guess_type('dummy.'+ext)[0], data=data)
             item.unload_data_from_memory()
