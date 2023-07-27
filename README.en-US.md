@@ -11,8 +11,9 @@ Go to [Releases Page](https://github.com/KaiHuaDou/calibre/releases/latest) to d
 
 ## Instructions
 
-1. Unzip the entire contents of `calibre.7z` to the Calibre installation directory
-2. Run `windows.bat` (Linux uses `linux.sh`)
+1. Make sure you have installed [Python 3.8+](https://python.org/downloads/) and [pip3](https://pip.pypa.io/en/stable/installation/)
+2. Unzip the entire contents of `calibre.7z` to the Calibre installation directory
+3. Run `windows.bat` (Linux uses `linux.sh`)
 
 ## Build
 

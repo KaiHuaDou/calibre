@@ -11,8 +11,9 @@
 
 ## 使用方法
 
-1. 将`calibre.7z`的全部内容解压至 Calibre 安装目录下
-2. 运行`windows.bat`（Linux 则使用`linux.sh`）
+1. 确保已经安装了 [Python 3.8+](https://python.org/downloads/) 和 [pip3](https://pip.pypa.io/en/stable/installation/)
+2. 将`calibre.7z`的全部内容解压至 Calibre 安装目录下
+3. 运行`windows.bat`（Linux 则使用`linux.sh`）
 
 ## 自主构建
 
