@@ -3,7 +3,6 @@
 mkdir calibre
 
 xcopy ..\src\* calibre\src /y /s /i /q
-xcopy ..\resources\* calibre\resources /y /s /i /q
 
 echo @echo off                         > calibre\windows.bat
 echo set _ROOT=%~dp0src               >> calibre\windows.bat
