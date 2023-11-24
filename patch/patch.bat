@@ -1,5 +1,9 @@
 @echo off
 
+cd ..
+git clean -xdf
+
+cd patch
 mkdir calibre
 
 xcopy ..\src\* calibre\src /y /s /i /q
