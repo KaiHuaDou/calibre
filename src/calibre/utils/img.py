@@ -272,7 +272,12 @@ def save_cover_data_to(
         changed = True
         img = img.scaled(int(resize_to[0]), int(resize_to[1]), Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation)
     owidth, oheight = img.width(), img.height()
-    nwidth, nheight = tweaks['maximum_cover_size'] if minify_to is None else minify_to
+    if minify_to is None:
+        nwidth, nheight = tweaks['maximum_cover_size']
+        nwidth, nheight = max(1, nwidth), max(1, nheight)
+    else:
+        nwidth, nheight = minify_to
+
     if letterbox:
         img = blend_on_canvas(img, nwidth, nheight, bgcolor=letterbox_color)
         # Check if we were minified
@@ -694,9 +699,6 @@ def convert_PIL_image_to_pixmap(im, device_pixel_ratio=1.0):
     if im.mode == "RGBA":
         fmt = QImage.Format.Format_RGBA8888
         data = im.tobytes("raw", "RGBA")
-    elif im.mode == "RGB":
-        fmt = QImage.Format.Format_RGBX8888
-        data = im.convert("RGBA").tobytes("raw", "RGBA")
     elif im.mode == "1":
         fmt = QImage.Format.Format_Mono
     elif im.mode == "L":
@@ -710,7 +712,8 @@ def convert_PIL_image_to_pixmap(im, device_pixel_ratio=1.0):
         im = im.point(lambda i: i * 256)
         fmt = QImage.Format.Format_Grayscale16
     else:
-        raise ValueError(f"unsupported image mode {repr(im.mode)}")
+        fmt = QImage.Format.Format_RGBX8888
+        data = im.convert("RGBA").tobytes("raw", "RGBA")
 
     size = im.size
     data = data or align8to32(im.tobytes(), size[0], im.mode)
