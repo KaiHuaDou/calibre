@@ -22,6 +22,24 @@ import math
 __license__ = 'GPL v3'
 __copyright__ = '2008, Marshall T. Vandegrift <llasram@gmail.com>'
 
+import math
+import numbers
+import operator
+import re
+from collections import defaultdict
+from xml.dom import SyntaxErr
+
+import css_parser
+from css_parser.css import Property
+from lxml import etree
+
+from calibre import guess_type
+from calibre.ebooks import unit_convert
+from calibre.ebooks.oeb.base import CSS_MIME, OEB_STYLES, SVG, SVG_NS, XHTML, XHTML_NS, XPath, barename, css_text, namespace
+from calibre.ebooks.oeb.stylizer import Stylizer
+from calibre.utils.filenames import ascii_filename, ascii_text
+from calibre.utils.icu import numeric_sort_key
+from polyglot.builtins import iteritems, string_or_bytes
 
 COLLAPSE = re.compile(r'[ \t\r\n\v]+')
 STRIPNUM = re.compile(r'[-0-9]+$')

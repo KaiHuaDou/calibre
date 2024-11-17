@@ -168,6 +168,9 @@ def send_mails(jobnames, callback, attachments, to_s, subjects,
                 # Amazon nowadays reads metadata from attachment filename instead of
                 # file internal metadata so dont nuke the filename.
                 # https://www.mobileread.com/forums/showthread.php?t=349290
+                from calibre.utils.filenames import format_filename
+                aname = format_filename(aname)
+            else:
                 aname = f'{uuid4()}.' + aname.rpartition('.')[-1]
             subject = uuid4()
             text = uuid4()
