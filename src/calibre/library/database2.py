@@ -46,7 +46,7 @@ from calibre.ptempfile import PersistentTemporaryFile, SpooledTemporaryFile, bas
 from calibre.utils.config import from_json, prefs, to_json, tweaks
 from calibre.utils.date import UNDEFINED_DATE, parse_date, parse_only_date, utcfromtimestamp, utcnow
 from calibre.utils.date import now as nowf
-from calibre.utils.filenames import WindowsAtomicFolderMove, ascii_filename, hardlink_file, samefile
+from calibre.utils.filenames import WindowsAtomicFolderMove, format_filename, hardlink_file, samefile
 from calibre.utils.formatter_functions import load_user_template_functions
 from calibre.utils.icu import lower, sort_key, strcmp
 from calibre.utils.icu import lower as icu_lower
@@ -614,14 +614,14 @@ class LibraryDatabase2(LibraryDatabase, SchemaUpgrade, CustomColumns):
         authors = self.authors(id, index_is_id=True)
         if not authors:
             authors = _('Unknown')
-        author = ascii_filename(authors.split(',')[0].replace('|', ',')
+        author = format_filename(authors.split(',')[0].replace('|', ',')
                     )[:self.PATH_LIMIT]
-        title  = ascii_filename(self.title(id, index_is_id=True)
+        title  = format_filename(self.title(id, index_is_id=True)
                     )[:self.PATH_LIMIT]
         while author[-1] in (' ', '.'):
             author = author[:-1]
         if not author:
-            author = ascii_filename(_('Unknown'))
+            author = format_filename(_('Unknown'))
         path = author + '/' + title + ' (%d)'%id
         return path
 
@@ -632,9 +632,9 @@ class LibraryDatabase2(LibraryDatabase, SchemaUpgrade, CustomColumns):
         authors = self.authors(id, index_is_id=True)
         if not authors:
             authors = _('Unknown')
-        author = ascii_filename(authors.split(',')[0].replace('|', ',')
+        author = format_filename(authors.split(',')[0].replace('|', ',')
                     )[:self.PATH_LIMIT]
-        title  = ascii_filename(self.title(id, index_is_id=True)
+        title  = format_filename(self.title(id, index_is_id=True)
                     )[:self.PATH_LIMIT]
         name   = title + ' - ' + author
         while name.endswith('.'):

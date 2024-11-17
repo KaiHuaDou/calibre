@@ -6,7 +6,7 @@ import os
 
 from calibre.customize.conversion import InputFormatPlugin
 from calibre.ptempfile import TemporaryDirectory
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 
 HTML_TEMPLATE = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>%s</title></head><body>\n%s\n</body></html>'
 
@@ -103,7 +103,7 @@ class SNBInput(InputFormatPlugin):
                         f.write((HTML_TEMPLATE % (chapterName, '\n'.join(lines))).encode('utf-8', 'replace'))
                     oeb.toc.add(ch.text, fname)
                     id, href = oeb.manifest.generate(id='html',
-                        href=ascii_filename(fname))
+                        href=format_filename(fname))
                     item = oeb.manifest.add(id, href, 'text/html')
                     item.html_input_href = fname
                     oeb.spine.add(item, True)
@@ -111,7 +111,7 @@ class SNBInput(InputFormatPlugin):
                 imageFiles = snbFile.OutputImageFiles(tdir)
                 for f, m in imageFiles:
                     id, href = oeb.manifest.generate(id='image',
-                        href=ascii_filename(f))
+                        href=format_filename(f))
                     item = oeb.manifest.add(id, href, m)
                     item.html_input_href = f
 

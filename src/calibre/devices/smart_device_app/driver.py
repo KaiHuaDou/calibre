@@ -36,7 +36,7 @@ from calibre.ebooks.metadata.book.json_codec import JsonCodec
 from calibre.library import current_library_name
 from calibre.ptempfile import PersistentTemporaryFile
 from calibre.utils.config_base import tweaks
-from calibre.utils.filenames import ascii_filename as sanitize
+from calibre.utils.filenames import format_filename as sanitize
 from calibre.utils.filenames import shorten_components_to
 from calibre.utils.ipc import eintr_retry_call
 from calibre.utils.mdns import get_all_ips

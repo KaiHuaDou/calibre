@@ -2,7 +2,7 @@ __license__ = 'GPL 3'
 __copyright__ = '2011, John Schember <john@nachtimwald.com>'
 __docformat__ = 'restructuredtext en'
 
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 
 
 class StorePlugin:  # {{{
@@ -55,7 +55,7 @@ class StorePlugin:  # {{{
         self.base_plugin = base_plugin
         if config is None:
             from calibre.utils.config import JSONConfig
-            config = JSONConfig('store/stores/' + ascii_filename(self.name))
+            config = JSONConfig('store/stores/' + format_filename(self.name))
         self.config = config
 
     def create_browser(self):

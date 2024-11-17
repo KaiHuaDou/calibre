@@ -529,7 +529,7 @@ class HTTPConnection(HTTPRequest):
                 x = x.decode('ascii')
             buf.append(x)
         buf.append('')
-        response_data = ReadOnlyFileBuffer(b''.join((x + '\r\n').encode('ascii') for x in buf))
+        response_data = ReadOnlyFileBuffer(b''.join((x + '\r\n').encode('UTF-8') for x in buf))
         if self.access_log is not None:
             sz = outheaders.get('Content-Length')
             if sz is not None:

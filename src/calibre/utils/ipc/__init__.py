@@ -10,7 +10,7 @@ import os
 
 from calibre import force_unicode
 from calibre.constants import filesystem_encoding, get_windows_username, islinux, iswindows
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 from polyglot.functools import lru_cache
 
 VADDRESS = None
@@ -35,12 +35,12 @@ def socket_address(which):
         except Exception:
             user = None
         if user:
-            user = ascii_filename(user).replace(' ', '_')
+            user = format_filename(user).replace(' ', '_')
             if user:
                 ans += '-' + user[:100] + 'x'
     else:
         user = force_unicode(os.environ.get('USER') or os.path.basename(os.path.expanduser('~')), filesystem_encoding)
-        sock_name = '{}-calibre-{}.socket'.format(ascii_filename(user).replace(' ', '_'), which)
+        sock_name = '{}-calibre-{}.socket'.format(format_filename(user).replace(' ', '_'), which)
         if islinux:
             ans = '\0' + sock_name
         else:

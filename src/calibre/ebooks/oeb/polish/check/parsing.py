@@ -114,11 +114,11 @@ class NamedEntities(BaseError):
 
 
 def make_filename_safe(name):
-    from calibre.utils.filenames import ascii_filename
+    from calibre.utils.filenames import format_filename
 
     def esc(n):
         return ''.join(x if x in URL_SAFE else '_' for x in n)
-    return '/'.join(esc(ascii_filename(x)) for x in name.split('/'))
+    return '/'.join(esc(format_filename(x)) for x in name.split('/'))
 
 
 class EscapedName(BaseError):

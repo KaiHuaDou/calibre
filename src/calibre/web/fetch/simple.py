@@ -25,7 +25,7 @@ from calibre.constants import filesystem_encoding, iswindows
 from calibre.ebooks.BeautifulSoup import BeautifulSoup
 from calibre.ebooks.chardet import xml_to_unicode
 from calibre.utils.config import OptionParser
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 from calibre.utils.imghdr import what
 from calibre.utils.localization import _
 from calibre.utils.logging import Log
@@ -439,7 +439,7 @@ class RecursiveFetcher:
                     self.log.exception('Could not fetch image ', iurl)
                     continue
             c += 1
-            fname = ascii_filename('img'+str(c))
+            fname = format_filename('img'+str(c))
             data = self.preprocess_image_ext(data, iurl) if self.preprocess_image_ext is not None else data
             if data is None:
                 continue
@@ -570,7 +570,7 @@ class RecursiveFetcher:
                     if not isinstance(_fname, str):
                         _fname.decode('latin1', 'replace')
                     _fname = _fname.replace('%', '').replace(os.sep, '')
-                    _fname = ascii_filename(_fname)
+                    _fname = format_filename(_fname)
                     _fname = os.path.splitext(_fname)[0][:120] + '.xhtml'
                     res = os.path.join(linkdiskpath, _fname)
                     self.downloaded_paths.append(res)

@@ -16,7 +16,7 @@ from calibre.gui2.store.config.search.search_widget import StoreConfigWidget
 from calibre.gui2.store.search.adv_search_builder import AdvSearchBuilderDialog
 from calibre.gui2.store.search.download_thread import CacheUpdateThreadPool, SearchThreadPool
 from calibre.gui2.store.search.search_ui import Ui_Dialog
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 
 
 def add_items_to_context_menu(self, menu):
@@ -403,7 +403,7 @@ class SearchDialog(QDialog, Ui_Dialog):
         if d.exec() == QDialog.DialogCode.Accepted:
             ext = d.format()
             fname = result.title[:60] + '.' + ext.lower()
-            fname = ascii_filename(fname)
+            fname = format_filename(fname)
             show_download_info(result.title, parent=self)
             self.gui.download_ebook(result.downloads[ext], filename=fname, create_browser=result.create_browser)
 

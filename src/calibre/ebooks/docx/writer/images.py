@@ -15,7 +15,7 @@ from calibre import fit_image
 from calibre.ebooks.docx.images import pt_to_emu
 from calibre.ebooks.docx.names import SVG_BLIP_URI, USE_LOCAL_DPI_URI
 from calibre.ebooks.oeb.base import urlquote, urlunquote
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 from calibre.utils.imghdr import identify
 from calibre.utils.resources import get_image_path as I
 
@@ -189,7 +189,7 @@ class ImagesManager:
         makeelement(makeelement(spPr, 'a:prstGeom', prst='rect'), 'a:avLst')
 
     def create_filename(self, href, fmt):
-        fname = ascii_filename(urlunquote(posixpath.basename(href)))
+        fname = format_filename(urlunquote(posixpath.basename(href)))
         fname = posixpath.splitext(fname)[0]
         fname = fname[:75].rstrip('.') or 'image'
         num = 0

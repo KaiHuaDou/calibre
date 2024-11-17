@@ -28,7 +28,7 @@ from calibre.srv.routes import endpoint, json
 from calibre.srv.utils import get_db, get_use_roman, http_date
 from calibre.utils.config_base import tweaks
 from calibre.utils.date import timestampfromdt
-from calibre.utils.filenames import ascii_filename, atomic_rename, make_long_path_useable
+from calibre.utils.filenames import format_filename, atomic_rename, make_long_path_useable
 from calibre.utils.img import image_from_data, scale_image
 from calibre.utils.localization import _
 from calibre.utils.resources import get_image_path as I
@@ -169,7 +169,7 @@ def fname_for_content_disposition(fname, as_encoded_unicode=False):
         fname = sanitize_file_name(fname).encode('utf-8')
         fname = str(quote(fname))
     else:
-        fname = ascii_filename(fname).replace('"', '_')
+        fname = format_filename(fname).replace('"', '_')
     return fname
 
 

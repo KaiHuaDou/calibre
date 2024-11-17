@@ -15,7 +15,7 @@ from calibre.gui2 import Dispatcher, gprefs
 from calibre.gui2.dialogs.message_box import MessageBox
 from calibre.gui2.threaded_jobs import ThreadedJob
 from calibre.ptempfile import PersistentTemporaryDirectory
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 from calibre.web import get_download_filename_from_response
 from polyglot.builtins import as_unicode, string_or_bytes
 
@@ -49,7 +49,7 @@ def get_download_filename(response):
     filename = get_download_filename_from_response(response)
     filename, ext = os.path.splitext(filename)
     filename = filename[:60] + ext
-    filename = ascii_filename(filename)
+    filename = format_filename(filename)
     return filename
 
 

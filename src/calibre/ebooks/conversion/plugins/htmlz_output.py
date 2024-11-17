@@ -56,7 +56,7 @@ class HTMLZOutput(OutputFormatPlugin):
 
         from calibre.ebooks.metadata.opf2 import OPF, metadata_to_opf
         from calibre.ebooks.oeb.base import OEB_IMAGES, SVG_MIME
-        from calibre.utils.filenames import ascii_filename
+        from calibre.utils.filenames import format_filename
         from calibre.utils.zipfile import ZipFile
 
         # HTML
@@ -76,7 +76,7 @@ class HTMLZOutput(OutputFormatPlugin):
             fname = 'index'
             if opts.htmlz_title_filename:
                 from calibre.utils.filenames import shorten_components_to
-                fname = shorten_components_to(100, (ascii_filename(str(oeb_book.metadata.title[0])),))[0]
+                fname = shorten_components_to(100, (format_filename(str(oeb_book.metadata.title[0])),))[0]
             with open(os.path.join(tdir, fname+'.html'), 'wb') as tf:
                 if isinstance(html, str):
                     html = html.encode('utf-8')

@@ -66,7 +66,7 @@ from calibre.gui2.dialogs.progress import ProgressDialog
 from calibre.gui2.progress_indicator import ProgressIndicator
 from calibre.gui2.widgets2 import Dialog
 from calibre.utils.date import utcnow
-from calibre.utils.filenames import ascii_filename, atomic_rename
+from calibre.utils.filenames import format_filename, atomic_rename
 from calibre.utils.https import HTTPError, get_https_resource_securely
 from calibre.utils.icu import numeric_sort_key as sort_key
 from calibre.utils.img import Canvas, image_from_data, optimize_jpeg, optimize_png
@@ -129,7 +129,7 @@ class Report:
 
     @property
     def name(self):
-        return ascii_filename(self.theme.title).replace(' ', '_').replace('.', '_').lower()
+        return format_filename(self.theme.title).replace(' ', '_').replace('.', '_').lower()
 
 
 def read_theme_from_folder(path):

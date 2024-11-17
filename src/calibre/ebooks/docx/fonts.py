@@ -9,7 +9,7 @@ import re
 from collections import namedtuple
 
 from calibre.ebooks.docx.block_styles import binary_property, inherit
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 from calibre.utils.fonts.scanner import NoFonts, font_scanner
 from calibre.utils.fonts.utils import is_truetype_font, panose_to_css_generic_family
 from calibre.utils.icu import ord_string
@@ -189,7 +189,7 @@ class Fonts:
         if not is_truetype_font(prefix):
             return None
         ext = 'otf' if prefix.startswith(b'OTTO') else 'ttf'
-        fname = ascii_filename(f'{name} - {variant}.{ext}').replace(' ', '_').replace('&', '_')
+        fname = format_filename(f'{name} - {variant}.{ext}').replace(' ', '_').replace('&', '_')
         with open(os.path.join(dest_dir, fname), 'wb') as dest:
             dest.write(prefix)
             dest.write(raw[32:])

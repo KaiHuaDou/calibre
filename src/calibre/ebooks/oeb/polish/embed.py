@@ -11,7 +11,7 @@ from lxml import etree
 
 from calibre import prints
 from calibre.ebooks.oeb.base import XHTML
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 from calibre.utils.icu import lower as icu_lower
 from polyglot.builtins import iteritems, itervalues, string_or_bytes
 
@@ -146,7 +146,7 @@ def do_embed(container, font, report):
     data = font_scanner.get_font_data(font)
     fname = font['full_name']
     ext = 'otf' if font['is_otf'] else 'ttf'
-    fname = ascii_filename(fname).replace(' ', '-').replace('(', '').replace(')', '')
+    fname = format_filename(fname).replace(' ', '-').replace('(', '').replace(')', '')
     item = container.generate_item('fonts/%s.%s'%(fname, ext), id_prefix='font')
     name = container.href_to_name(item.get('href'), container.opf_name)
     with container.open(name, 'wb') as out:

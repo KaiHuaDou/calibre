@@ -457,7 +457,7 @@ class MobiWriter:
         '''
         Write the PalmDB header
         '''
-        title = ascii_filename(str(self.oeb.metadata.title[0])).replace(
+        title = format_filename(str(self.oeb.metadata.title[0])).replace(
                 ' ', '_')
         if not isinstance(title, bytes):
             title = title.encode('ascii')

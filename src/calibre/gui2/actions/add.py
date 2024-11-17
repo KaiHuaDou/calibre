@@ -22,7 +22,7 @@ from calibre.gui2.dialogs.confirm_delete import confirm
 from calibre.gui2.dialogs.progress import ProgressDialog
 from calibre.ptempfile import PersistentTemporaryFile
 from calibre.utils.config_base import tweaks
-from calibre.utils.filenames import ascii_filename, make_long_path_useable
+from calibre.utils.filenames import format_filename, make_long_path_useable
 from calibre.utils.icu import sort_key
 from calibre.utils.localization import ngettext
 from polyglot.builtins import iteritems, string_or_bytes
@@ -602,7 +602,7 @@ class AddAction(InterfaceAction):
             for mi, cover_path, format_paths in adder.items:
                 mi.cover = cover_path
                 paths.append(format_paths[0]), infos.append(mi)
-                names.append(ascii_filename(os.path.basename(paths[-1])))
+                names.append(format_filename(os.path.basename(paths[-1])))
             self.gui.upload_books(paths, names, infos, on_card=on_card)
             self.gui.status_bar.show_message(
                     _('Uploading books to device.'), 2000)

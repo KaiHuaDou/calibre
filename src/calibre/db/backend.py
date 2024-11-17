@@ -57,7 +57,7 @@ from calibre.utils.config import from_json, prefs, to_json, tweaks
 from calibre.utils.copy_files import copy_files, copy_tree, rename_files, windows_check_if_files_in_use
 from calibre.utils.date import EPOCH, parse_date, utcfromtimestamp, utcnow
 from calibre.utils.filenames import (
-    ascii_filename,
+    format_filename,
     atomic_rename,
     copyfile_using_links,
     copytree_using_links,
@@ -1471,8 +1471,8 @@ class DB:
         '''
         book_id = BOOK_ID_PATH_TEMPLATE.format(book_id)
         l = self.PATH_LIMIT - (len(book_id) // 2) - 2
-        author = ascii_filename(author)[:l]
-        title  = ascii_filename(title.lstrip())[:l].rstrip()
+        author = format_filename(author)[:l]
+        title  = format_filename(title.lstrip())[:l].rstrip()
         if not title:
             title = 'Unknown'[:l]
         try:
@@ -1481,7 +1481,7 @@ class DB:
         except IndexError:
             author = ''
         if not author:
-            author = ascii_filename(_('Unknown'))
+            author = format_filename(_('Unknown'))
         if author.upper() in WINDOWS_RESERVED_NAMES:
             author += 'w'
         return f'{author}/{title}{book_id}'
@@ -1498,15 +1498,15 @@ class DB:
         l = (self.PATH_LIMIT - (extlen // 2) - 2) if iswindows else ((self.PATH_LIMIT - extlen - 2) // 2)
         if l < 5:
             raise ValueError('Extension length too long: %d' % extlen)
-        author = ascii_filename(author)[:l]
-        title  = ascii_filename(title.lstrip())[:l].rstrip()
+        author = format_filename(author)[:l]
+        title  = format_filename(title.lstrip())[:l].rstrip()
         if not title:
             title = 'Unknown'[:l]
         name   = title + ' - ' + author
         while name.endswith('.'):
             name = name[:-1]
         if not name:
-            name = ascii_filename(_('Unknown'))
+            name = format_filename(_('Unknown'))
         return name
 
     # Database layer API {{{

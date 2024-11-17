@@ -14,14 +14,14 @@ from urllib.parse import quote
 
 from calibre.constants import filesystem_encoding, isbsd, islinux
 from calibre.customize.conversion import InputFormatPlugin, OptionRecommendation
-from calibre.utils.filenames import ascii_filename, case_ignoring_open_file, get_long_path_name
+from calibre.utils.filenames import format_filename, case_ignoring_open_file, get_long_path_name
 from calibre.utils.imghdr import what
 from calibre.utils.localization import __, get_lang
 from polyglot.builtins import as_unicode
 
 
 def sanitize_file_name(x):
-    ans = re.sub(r'\s+', ' ', ascii_filename(x))
+    ans = re.sub(r'\s+', ' ', format_filename(x))
     for ch in '?&=;#/\\':
         ans = ans.replace(ch, '_')
         q = quote(ch, safe='')

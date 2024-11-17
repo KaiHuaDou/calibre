@@ -53,7 +53,7 @@ from calibre.ptempfile import PersistentTemporaryFile
 from calibre.ptempfile import force_unicode as filename_to_unicode
 from calibre.startup import connect_lambda
 from calibre.utils.config import device_prefs, tweaks
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 from calibre.utils.img import scale_image
 from calibre.utils.ipc.job import BaseJob
 from calibre.utils.localization import ngettext
@@ -1428,10 +1428,10 @@ class DeviceMixin:  # {{{
             metadata = self.library_view.model().metadata_for(ids)
             names = []
             for book_id, mi in zip(ids, metadata):
-                prefix = ascii_filename(mi.title)
+                prefix = format_filename(mi.title)
                 if not isinstance(prefix, str):
                     prefix = prefix.decode(preferred_encoding, 'replace')
-                prefix = ascii_filename(prefix)
+                prefix = format_filename(prefix)
                 names.append('%s_%d%s'%(prefix, book_id,
                     os.path.splitext(files[-1])[1]))
                 self.update_thumbnail(mi)
@@ -1506,10 +1506,10 @@ class DeviceMixin:  # {{{
             metadata = self.library_view.model().metadata_for(ids)
             names = []
             for book_id, mi in zip(ids, metadata):
-                prefix = ascii_filename(mi.title)
+                prefix = format_filename(mi.title)
                 if not isinstance(prefix, str):
                     prefix = prefix.decode(preferred_encoding, 'replace')
-                prefix = ascii_filename(prefix)
+                prefix = format_filename(prefix)
                 names.append('%s_%d%s'%(prefix, book_id,
                     os.path.splitext(files[-1])[1]))
                 self.update_thumbnail(mi)
@@ -1585,10 +1585,10 @@ class DeviceMixin:  # {{{
                 a = mi.format_authors()
                 if not a:
                     a = _('Unknown')
-                prefix = ascii_filename(t+' - '+a)
+                prefix = format_filename(t+' - '+a)
                 if not isinstance(prefix, str):
                     prefix = prefix.decode(preferred_encoding, 'replace')
-                prefix = ascii_filename(prefix)
+                prefix = format_filename(prefix)
                 names.append('%s_%d%s'%(prefix, id, os.path.splitext(f)[1]))
         remove = remove_ids if delete_from_library else []
         self.upload_books(gf, names, good, on_card, memory=(_files, remove))

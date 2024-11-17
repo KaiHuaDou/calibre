@@ -14,7 +14,7 @@ from calibre import setup_cli_handlers
 from calibre.ebooks.lrf.meta import LRFMetaFile
 from calibre.ebooks.lrf.objects import BookAttr, Font, PageTree, StyleObject, Text, TOCObject, get_object, ruby_tags
 from calibre.utils.config import OptionParser
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 from polyglot.builtins import itervalues
 
 
@@ -97,7 +97,7 @@ class LRFDocument(LRFMetaFile):
         bookinfo += '<FreeText reading="">%s</FreeText>\n</BookInfo>\n<DocInfo>\n'%(self.metadata.free_text,)
         th = self.doc_info.thumbnail
         if th:
-            prefix = ascii_filename(self.metadata.title)
+            prefix = format_filename(self.metadata.title)
             bookinfo += '<CThumbnail file="%s" />\n'%(prefix+'_thumbnail.'+self.doc_info.thumbnail_extension,)
             if write_files:
                 with open(prefix+'_thumbnail.'+self.doc_info.thumbnail_extension, 'wb') as f:

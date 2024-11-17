@@ -29,10 +29,12 @@ def ascii_text(orig):
     return ascii
 
 
-def ascii_filename(orig, substitute='_'):
+def format_filename(orig, substitute='_'):
     if isinstance(substitute, bytes):
         substitute = substitute.decode(filesystem_encoding)
-    orig = ascii_text(orig).replace('?', '_')
+    # Set 'localized = False' to convert filename to ASCII.
+    localized = True
+    orig = orig if localized else ascii_text(orig).replace('?', '_')
     ans = ''.join(x if ord(x) >= 32 else substitute for x in orig)
     return sanitize_file_name(ans, substitute=substitute)
 

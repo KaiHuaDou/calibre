@@ -228,7 +228,7 @@ class EmbedFonts:
             data = font_scanner.get_font_data(f)
             name = f['full_name']
             ext = 'otf' if f['is_otf'] else 'ttf'
-            name = ascii_filename(name).replace(' ', '-').replace('(', '').replace(')', '')
+            name = format_filename(name).replace(' ', '-').replace('(', '').replace(')', '')
             fid, href = self.oeb.manifest.generate(id='font', href='fonts/%s.%s'%(name, ext))
             item = self.oeb.manifest.add(fid, href, guess_type('dummy.'+ext)[0], data=data)
             item.unload_data_from_memory()

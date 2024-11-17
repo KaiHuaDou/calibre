@@ -410,7 +410,7 @@ class MTP_DEVICE(BASE):
 
     def create_upload_path(self, path, mdata, fname, routing):
         from calibre.devices.utils import create_upload_path
-        from calibre.utils.filenames import ascii_filename as sanitize
+        from calibre.utils.filenames import format_filename as sanitize
         ext = fname.rpartition('.')[-1].lower()
         path = routing.get(ext, path)
 

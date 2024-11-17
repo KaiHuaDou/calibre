@@ -14,7 +14,7 @@ from calibre.ebooks.mobi.utils import RECORD_SIZE, utf8_text
 from calibre.ebooks.mobi.writer2 import PALMDOC, UNCOMPRESSED
 from calibre.ebooks.mobi.writer8.exth import build_exth
 from calibre.ebooks.mobi.writer8.header import Header
-from calibre.utils.filenames import ascii_filename
+from calibre.utils.filenames import format_filename
 
 NULL_INDEX = 0xffffffff
 FLIS = b'FLIS\0\0\0\x08\0\x41\0\0\0\0\0\0\xff\xff\xff\xff\0\x01\0\x03\0\0\0\x03\0\0\0\x01'+ b'\xff'*4
@@ -330,7 +330,7 @@ class KF8Book:
 
             # Write PalmDB Header
 
-            title = ascii_filename(self.full_title.decode('utf-8')).replace(' ', '_')
+            title = format_filename(self.full_title.decode('utf-8')).replace(' ', '_')
             if not isinstance(title, bytes):
                 title = title.encode('ascii')
             title = title[:31]
